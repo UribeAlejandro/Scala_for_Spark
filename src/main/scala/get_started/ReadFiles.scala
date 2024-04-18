@@ -1,6 +1,5 @@
 package enough.scala.spark
-
-import get.started.CreateSparkSession
+package get_started
 
 object ReadFiles {
   def main(args: Array[String]): Unit = {

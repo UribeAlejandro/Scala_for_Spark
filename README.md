@@ -50,7 +50,7 @@ libraryDependencies ++= Seq(
 
 ### VM Options
 
-To run `Spark` with `Java` 17 you need to add the following VM options: 
+To run `Spark` with `Java` 17 you need to add the following VM options:
 
 ```shell
 --add-exports java.base/sun.nio.ch=ALL-UNNAMED
@@ -63,4 +63,6 @@ Add it to the configuration in the IDE.
 
 Download [Stock Market dataset](https://www.kaggle.com/datasets/jacksoncrow/stock-market-dataset) from Kaggle.
 
-- [Get Started](src/main/scala/get/started/README.md)
+- [Spark Session](src/main/scala/README.md)
+- [Get Started](src/main/scala/get_started/README.md)
+- [Dataset API](src/main/scala/dataset_api/README.md)

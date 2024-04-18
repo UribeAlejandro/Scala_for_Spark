@@ -1,25 +1,19 @@
 package enough.scala.spark
-package get.CreateSparkSession
-
-import get.started.CreateSparkSession
 
 import org.apache.spark.sql.types.{DateType, DoubleType, IntegerType, StructField, StructType}
+import org.apache.spark.sql.{DataFrame, SparkSession}
 
-object Schema {
-  def main(args: Array[String]): Unit = {
-    val spark = CreateSparkSession.createSparkSession()
-    var df = spark.read
-      .option("header", true)
-      .csv("data/raw/AAPL.csv")
-    df.printSchema()
-
-    df = spark.read
-      .option("header", true)
-      .option("inferSchema", true)
-      .csv("data/raw/AAPL.csv")
-
-    df.printSchema()
-
+object CreateSparkSession {
+  def createSparkSession(): SparkSession = {
+    SparkSession
+      .builder()
+      .appName("Scala-for-Spark")
+      .master("local[*]")
+      .config("spark.driver.bindAddress", "127.0.0.1")
+      .getOrCreate()
+  }
+  def get_data(): DataFrame = {
+    val spark = createSparkSession()
     val schema = StructType(
       Array(
         StructField("Date", DateType, true),
@@ -31,10 +25,10 @@ object Schema {
       )
     )
 
-    df = spark.read
+    val df = spark.read
       .option("header", true)
       .schema(schema)
       .csv("data/raw/AAPL.csv")
-    df.printSchema()
+    df
   }
 }

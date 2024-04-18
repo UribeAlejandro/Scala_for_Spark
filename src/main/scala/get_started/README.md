@@ -1,18 +1,5 @@
 # Get Started
 
-## Create a SparkSession
-
-To start programming with Scala and Spark, instantiate a `SparkSession` object and use it to read data from a file, a database, or any other data source.
-
-```scala
-import org.apache.spark.sql.SparkSession
-
-val spark = SparkSession.builder()
-  .appName("Spark SQL basic example")
-  .config("spark.some.config.option", "some-value")
-  .getOrCreate()
-```
-
 ## Read Data
 
 To [read a csv](https://spark.apache.org/docs/latest/sql-data-sources-csv.html) file, use the `read` method of the `SparkSession` object. The `read` method returns a `DataFrameReader` object, which you can use to read data from a file.
@@ -46,7 +33,7 @@ root
  |-- Volume: string (nullable = true)
 ```
 
-The schema does not look right. If no schema was specified when reading a csv file, Spark uses string types for all columns. 
+The schema does not look right. If no schema was specified when reading a csv file, Spark uses string types for all columns.
 
 Spark can infer the schema of a csv file. To infer the schema, use the `inferSchema` method of the `DataFrameReader` object.
 
