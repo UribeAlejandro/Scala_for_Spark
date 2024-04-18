@@ -1,13 +1,15 @@
 package enough.scala.spark
 package dataset_api
 
-import CreateSparkSession.get_data
-
 import org.apache.spark.sql.DataFrame
 
-object DatasetsOperations {
-def main(args: Array[String]): Unit = {
-    val df: DataFrame = get_data()
+object DatasetsOperations extends SparkSessionWrapper {
+  def main(args: Array[String]): Unit = {
+    val df: DataFrame = spark.read
+      .option("header", true)
+      .option("inferSchema", true)
+      .csv("data/raw/AAPL.csv")
+
     val column = df("Open")
     val columnPlusTwo = column + 2.0
     val columnString = column.cast("String").as("OpenString")

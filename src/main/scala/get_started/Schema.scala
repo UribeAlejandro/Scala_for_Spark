@@ -3,14 +3,15 @@ package get_started
 
 import org.apache.spark.sql.types._
 
-object Schema {
+object Schema extends SparkSessionWrapper {
   def main(args: Array[String]): Unit = {
-    val spark = CreateSparkSession.createSparkSession()
+//  Without Inferring Schema
     var df = spark.read
       .option("header", true)
       .csv("data/raw/AAPL.csv")
     df.printSchema()
 
+//  Inferring Schema
     df = spark.read
       .option("header", true)
       .option("inferSchema", true)
@@ -18,6 +19,7 @@ object Schema {
 
     df.printSchema()
 
+//  Define Schema
     val schema = StructType(
       Array(
         StructField("Date", DateType, true),
@@ -25,9 +27,7 @@ object Schema {
         StructField("High", DoubleType, true),
         StructField("Low", DoubleType, true),
         StructField("Close", DoubleType, true),
-        StructField("Volume", IntegerType, true)
-      )
-    )
+        StructField("Volume", DoubleType, true)))
 
     df = spark.read
       .option("header", true)

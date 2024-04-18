@@ -1,16 +1,12 @@
 package enough.scala.spark
 package dataset_api
 
-import CreateSparkSession.get_data
-
 import org.apache.spark.sql.functions.col
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import org.apache.spark.sql.DataFrame
 
-object Datasets {
+object Datasets extends SparkSessionWrapper {
   def main(args: Array[String]): Unit = {
-    val spark: SparkSession = CreateSparkSession.createSparkSession()
-    val df: DataFrame = spark
-      .read
+    val df: DataFrame = spark.read
       .option("header", true)
       .option("inferSchema", true)
       .csv("data/raw/AAPL.csv")
